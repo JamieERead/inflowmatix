@@ -1,22 +1,17 @@
 import React from 'react';
 
-const Asset = ({ name, description, latitude, longitude }) => (
+const Asset = ({ name, description, location }) => (
   <div>
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title">{name}</p>
+    <div className="card">
+      <header className="card-header">
+        <p className="card-header-title">{name}</p>
       </header>
-      <div class="card-content">
-        <div class="content">
-          <div>{latitude} - {longitude}</div>
+      <div className="card-content">
+        <div className="content">
+          <div><b>lat</b> {location.latitude} <b>long</b> {location.longitude}</div>
           {description}
         </div>
       </div>
-      <footer class="card-footer">
-        <a href="#" class="card-footer-item">Save</a>
-        <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
     </div>
   </div>
 )

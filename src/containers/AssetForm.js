@@ -1,5 +1,5 @@
 import React from 'react';
-import { addAsset } from '../actions';
+import { saveAsset, cancelAsset } from '../actions';
 import { connect } from 'react-redux';
 import FormInput from '../components/FormInput';
 
@@ -10,10 +10,12 @@ class AssetForm extends React.Component {
       name: '',
       description: '',
       latitude: '',
-      longitude: ''
+      longitude: '',
+      submitted: false
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleFormCancel = this.handleFormCancel.bind(this);
   }
 
   handleInputChange(event) {
@@ -27,43 +29,84 @@ class AssetForm extends React.Component {
   }
 
   handleFormSubmit(event) {
-    event.preventDefault()
-    this.props.dispatch(addAsset(this.state))
+    event.preventDefault();
+
+    // validation check
+    const name = this.state.name.trim();
+    const description = this.state.description.trim();
+    const latitude = this.state.latitude.trim();
+    const longitude = this.state.longitude.trim(); 
+    let valid = name && description && latitude && longitude;
+
+    if(!valid) {
+      this.setState({
+        name: name,
+        description: description,
+        latitude: latitude,
+        longitude: longitude,
+        submitted: true
+      })
+      return;
+    }
+
+    this.props.dispatch(saveAsset(this.state));
+  }
+
+  handleFormCancel() {
+    this.props.dispatch(cancelAsset());
   }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleFormSubmit}>
-          <FormInput
-            name="name"
-            value={this.state.name}
-            handleInputChange={this.handleInputChange} />
-          <FormInput
-            name="description"
-            value={this.state.description}
-            handleInputChange={this.handleInputChange} />
-          <FormInput
-            name="latitude"
-            value={this.state.latitude}
-            handleInputChange={this.handleInputChange} />
-          <FormInput
-            name="longitude"
-            value={this.state.longitude}
-            handleInputChange={this.handleInputChange} />
-          <div className="field is-horizontal">
-            <div className="field-label" />
-            <div className="field-body">
-              <div className="field">
-                <div className="control">
-                  <button type="submit" className="button is-primary">
-                    Save Asset
-                  </button>
-                </div>
+      <div className="section">
+        <div className="container">
+          <form onSubmit={this.handleFormSubmit} className="box">
+            <FormInput
+              name="name"
+              submitted={this.state.submitted}
+              value={this.state.name}
+              placeholder="Type the asset name"
+              handleInputChange={this.handleInputChange} />
+            <FormInput
+              name="description"
+              submitted={this.state.submitted}
+              value={this.state.description}
+              placeholder="Description or condition of asset"
+              handleInputChange={this.handleInputChange} />
+            <FormInput
+              name="latitude"
+              submitted={this.state.submitted}
+              value={this.state.latitude}
+              placeholder="lat coordinate"
+              handleInputChange={this.handleInputChange} />
+            <FormInput
+              name="longitude"
+              submitted={this.state.submitted}
+              value={this.state.longitude}
+              placeholder="long coordinate"
+              handleInputChange={this.handleInputChange} />
+            <div className="field is-horizontal">
+              <div className="field-label" />
+                <div className="field-body">
+                  <div className="field is-grouped">
+                    <p className="control">
+                      <button type="submit" className="button is-primary">
+                        Save Asset
+                      </button>
+                    </p>
+                    <p className="control">
+                      <button 
+                        onClick={() => this.handleFormCancel()}
+                        type="button" 
+                        className="button is-primary">
+                        Cancel
+                      </button>
+                    </p>
+                  </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     )
   }

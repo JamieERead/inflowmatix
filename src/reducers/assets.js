@@ -1,11 +1,16 @@
 const assets = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_ASSET':
+    case 'SAVE_ASSET':
       return [
         ...state,
         {
           id: action.id,
-          asset: action.asset
+          name: action.asset.name,
+          description: action.asset.description,
+          location: {
+            latitude: action.asset.latitude,
+            longitude: action.asset.longitude
+          }
         }
       ];
     default:
