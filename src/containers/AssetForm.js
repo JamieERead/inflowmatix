@@ -2,6 +2,7 @@ import React from 'react';
 import { saveAsset, cancelAsset } from '../actions';
 import { connect } from 'react-redux';
 import FormInput from '../components/FormInput';
+import SubmitButtons from '../components/SubmitButtons';
 
 class AssetForm extends React.Component {
   constructor(props) {
@@ -85,26 +86,7 @@ class AssetForm extends React.Component {
               value={this.state.longitude}
               placeholder="long coordinate"
               handleInputChange={this.handleInputChange} />
-            <div className="field is-horizontal">
-              <div className="field-label" />
-                <div className="field-body">
-                  <div className="field is-grouped">
-                    <p className="control">
-                      <button type="submit" className="button is-primary">
-                        Save Asset
-                      </button>
-                    </p>
-                    <p className="control">
-                      <button 
-                        onClick={() => this.handleFormCancel()}
-                        type="button" 
-                        className="button is-primary">
-                        Cancel
-                      </button>
-                    </p>
-                  </div>
-              </div>
-            </div>
+            <SubmitButtons handleFormCancel={this.handleFormCancel} />
           </form>
         </div>
       </div>
