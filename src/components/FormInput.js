@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 const FormInput = ({ name, value, placeholder, submitted, handleInputChange }) => (
   <div className="field is-horizontal">
@@ -23,5 +24,13 @@ const FormInput = ({ name, value, placeholder, submitted, handleInputChange }) =
     </div>
   </div>
 )
+
+FormInput.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  submitted: PropTypes.bool.isRequired,
+  handleInputChange: PropTypes.func.isRequired
+}
 
 export default FormInput

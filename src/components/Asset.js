@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 const Asset = ({ name, description, location }) => (
   <div>
@@ -15,5 +16,14 @@ const Asset = ({ name, description, location }) => (
     </div>
   </div>
 )
+
+Asset.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    latitude: PropTypes.string.isRequired,
+    longitude: PropTypes.string.isRequired
+  })
+}
 
 export default Asset

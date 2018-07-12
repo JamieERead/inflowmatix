@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 const SubmitButtons = ({ handleFormCancel }) => (
   <div className="field is-horizontal">
@@ -22,5 +23,9 @@ const SubmitButtons = ({ handleFormCancel }) => (
     </div>
   </div>
 )
+
+SubmitButtons.propTypes = {
+  handleFormCancel: PropTypes.func.isRequired
+}
 
 export default SubmitButtons
