@@ -2,13 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store'
 import AssetForm from '../AssetForm';
-import { saveAsset } from '../../actions';
 
-fdescribe('AssetForm', () => {
+describe('AssetForm', () => {
   const initialState = {}; 
   const mockStore = configureStore();
   let wrapper;
   let store;
+
   beforeEach(() => {
     store = mockStore(initialState);
     store.dispatch = jest.fn();

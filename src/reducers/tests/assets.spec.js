@@ -25,6 +25,14 @@ describe('Assets reducer', () => {
         longitude: '098'
       }
     };
-    expect(assets(state, action)).toEqual([...state, action.asset])
+    expect(assets(state, action)).toEqual([...state, {
+      id: 1,
+      name: 'Fire Hydrant 2',
+      description: 'In good condition again',
+      location: {
+        latitude: '789',
+        longitude: '098'
+      }
+    }]);
   });
 });
